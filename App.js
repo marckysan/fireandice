@@ -1,7 +1,7 @@
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import CharacterItem from './components/CharacterItem';
+import {StyleSheet, View} from 'react-native';
 import Header from './components/Header';
+import CharacterList from './screens/CharacterList';
 
 const App = () => {
   return (
@@ -9,9 +9,7 @@ const App = () => {
       <View styles="styles.headerContainer">
         <Header />
       </View>
-      <ScrollView>
-        <CharacterItem />
-      </ScrollView>
+      <CharacterList />
     </View>
   );
 };
