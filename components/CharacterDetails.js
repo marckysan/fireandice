@@ -8,6 +8,7 @@ const CharacterDetails = props => {
         <View style={styles.modalBox}>
           <View style={styles.characterDetailsBox}>
             <Text style={styles.characterName}>Character Name</Text>
+
             <Button title="Back" onPress={props.onCloseModal} />
           </View>
         </View>
@@ -30,6 +31,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
+
+    shadowColor: 'black',
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 6,
+    shadowOpacity: 0.26,
+    elevation: 10,
   },
 
   modalBox: {

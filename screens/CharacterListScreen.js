@@ -2,10 +2,14 @@ import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import CharacterItem from '../components/CharacterItem';
 
-const CharacterList = () => {
+const CharacterListScreen = () => {
   return (
     <View>
       <ScrollView>
+        <CharacterItem />
+        <CharacterItem />
+        <CharacterItem />
+        <CharacterItem />
         <CharacterItem />
       </ScrollView>
     </View>
@@ -21,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CharacterList;
+export default CharacterListScreen;
