@@ -1,0 +1,6 @@
+module Pods_FireAndIce {
+  umbrella header "Pods-FireAndIce-umbrella.h"
+
+  export *
+  module * { export * }
+}

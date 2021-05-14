@@ -1,0 +1,6 @@
+module Pods_FireAndIce_FireAndIceTests {
+  umbrella header "Pods-FireAndIce-FireAndIceTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,14 @@
+com/fireandice/MainApplication.java
+ com.fireandice.MainApplication
+ com.fireandice.MainApplication$1
+com/fireandice/BuildConfig.java
+ com.fireandice.BuildConfig
+com/fireandice/MainActivity.java
+ com.fireandice.MainActivity
+com/fireandice/ReactNativeFlipper.java
+ com.fireandice.ReactNativeFlipper
+ com.fireandice.ReactNativeFlipper$1
+ com.fireandice.ReactNativeFlipper$2
+ com.fireandice.ReactNativeFlipper$2$1
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
