@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import CharacterItem from '../components/CharacterItem';
+import Header from '../components/Header';
 
-const CharacterListScreen = () => {
+const CharacterListScreen = props => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   console.log(data);
@@ -17,13 +18,18 @@ const CharacterListScreen = () => {
 
   return (
     <View>
-      <ScrollView>
-        <CharacterItem />
-        <CharacterItem />
-        <CharacterItem />
-        <CharacterItem />
-        <CharacterItem />
-      </ScrollView>
+      <View styles="styles.headerContainer">
+        <Header />
+      </View>
+      <View>
+        <ScrollView>
+          <CharacterItem navigationProps={props.navigation} />
+          <CharacterItem navigationProps={props.navigation} />
+          <CharacterItem navigationProps={props.navigation} />
+          <CharacterItem navigationProps={props.navigation} />
+          <CharacterItem navigationProps={props.navigation} />
+        </ScrollView>
+      </View>
     </View>
   );
 };

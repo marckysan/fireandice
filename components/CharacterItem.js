@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
-import CharacterDetails from './CharacterDetails';
 
 const CharacterItem = props => {
   const [isVisible, setIsVisible] = useState(false);
+
+  console.log(props);
 
   const closeModal = () => {
     setIsVisible(false);
@@ -12,8 +13,13 @@ const CharacterItem = props => {
   return (
     <View style={styles.characterBox}>
       <Text>Character Name</Text>
-      <Button title="View Details" onPress={() => setIsVisible(true)} />
-      <CharacterDetails isVisible={isVisible} onCloseModal={closeModal} />
+      <Button
+        title="View Details"
+        onPress={() =>
+          props.navigationProps.navigate({routeName: 'CharacterDetailsPage'})
+        }
+      />
+      {/* <CharacterDetails isVisible={isVisible} onCloseModal={closeModal} /> */}
     </View>
   );
 };

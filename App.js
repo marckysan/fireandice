@@ -1,8 +1,7 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {combineReducers, createStore} from 'redux';
-import Header from './components/Header';
-import CharacterListScreen from './screens/CharacterListScreen';
+import AppNavigator from './navigations/AppNavigator';
 import CharacterReducer from './store/reducers/CharacterReducer';
 
 const rootReducer = combineReducers({
@@ -11,23 +10,9 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer);
 
 const App = () => {
-  return (
-    <View>
-      <View styles="styles.headerContainer">
-        <Header />
-      </View>
-      <CharacterListScreen />
-    </View>
-  );
+  return <AppNavigator />;
 };
 
-const styles = StyleSheet.create({
-  headerContainer: {
-    justifyContent: 'space-between',
-    alignContent: 'center',
-    alignItems: 'center',
-    height: 300,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default App;

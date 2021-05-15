@@ -1,18 +1,18 @@
 import React from 'react';
-import {Button, Modal, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
-const CharacterDetails = props => {
+const CharacterDetailsScreen = props => {
   return (
     <View>
-      <Modal visible={props.isVisible} animationType="slide">
-        <View style={styles.modalBox}>
-          <View style={styles.characterDetailsBox}>
-            <Text style={styles.characterName}>Character Name</Text>
+      {/* <Modal visible={props.isVisible} animationType="slide"> */}
+      <View style={styles.modalBox}>
+        <View style={styles.characterDetailsBox}>
+          <Text style={styles.characterName}>Character Name</Text>
 
-            <Button title="Back" onPress={props.onCloseModal} />
-          </View>
+          <Button title="Back" onPress={props.onCloseModal} />
         </View>
-      </Modal>
+      </View>
+      {/* </Modal> */}
     </View>
   );
 };
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CharacterDetails;
+export default CharacterDetailsScreen;
