@@ -1,7 +1,14 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {combineReducers, createStore} from 'redux';
 import Header from './components/Header';
 import CharacterListScreen from './screens/CharacterListScreen';
+import CharacterReducer from './store/reducers/CharacterReducer';
+
+const rootReducer = combineReducers({
+  character: CharacterReducer,
+});
+const store = createStore(rootReducer);
 
 const App = () => {
   return (
