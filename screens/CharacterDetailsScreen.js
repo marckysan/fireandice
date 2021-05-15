@@ -2,14 +2,19 @@ import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 
 const CharacterDetailsScreen = props => {
+  console.log(props);
   return (
     <View>
-      {/* <Modal visible={props.isVisible} animationType="slide"> */}
       <View style={styles.modalBox}>
         <View style={styles.characterDetailsBox}>
           <Text style={styles.characterName}>Character Name</Text>
 
-          <Button title="Back" onPress={props.onCloseModal} />
+          <Button
+            title="Back"
+            onPress={() => {
+              props.navigation.goBack();
+            }}
+          />
         </View>
       </View>
       {/* </Modal> */}

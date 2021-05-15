@@ -6,7 +6,7 @@ import Header from '../components/Header';
 const CharacterListScreen = props => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     fetch('https://www.anapioficeandfire.com/api/characters')

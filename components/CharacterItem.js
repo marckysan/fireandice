@@ -1,25 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 
 const CharacterItem = props => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  console.log(props);
-
-  const closeModal = () => {
-    setIsVisible(false);
-  };
-
   return (
     <View style={styles.characterBox}>
       <Text>Character Name</Text>
       <Button
         title="View Details"
-        onPress={() =>
-          props.navigationProps.navigate({routeName: 'CharacterDetailsPage'})
-        }
+        onPress={() => props.navigationProps.navigate('CharacterDetailsPage')}
+        navigateFurther={props.navigationProps}
       />
-      {/* <CharacterDetails isVisible={isVisible} onCloseModal={closeModal} /> */}
     </View>
   );
 };
