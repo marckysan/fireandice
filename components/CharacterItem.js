@@ -8,10 +8,12 @@ const CharacterItem = props => {
       <Text>{props.character.aliases}</Text>
       <Button
         title="View Details"
-        onPress={() => props.navigationProps.navigate('CharacterDetailsPage')}
-        navigateFurther={props.navigationProps}
-        passOnCharacter={props.character}
-        passOnImageUri={props.imageUri}
+        onPress={() =>
+          props.navigationProps.navigate('CharacterDetailsPage', {
+            passOnCharacter: props.character,
+            passOnImageUri: props.imageUri,
+          })
+        }
       />
     </View>
   );

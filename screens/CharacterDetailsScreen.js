@@ -2,14 +2,27 @@ import React from 'react';
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
 
 const CharacterDetailsScreen = props => {
-  console.log(props);
+  console.log(props.navigation.state.params);
   return (
     <View>
       <View style={styles.modalBox}>
         <View style={styles.characterDetailsBox}>
-          <Image source={{source: props.imageUri}} styles={styles.image} />
-          <Text style={styles.characterName}>{props.character.aliases}</Text>
-          <Text style={styles.characterName}>{props.character.culture}</Text>
+          <Image
+            source={{
+              uri: JSON.stringify(props.navigation.state.params.passOnImageUri),
+            }}
+            styles={styles.image}
+          />
+          <Text style={styles.characterName}>
+            {JSON.stringify(
+              props.navigation.state.params.passOnCharacter.aliases[0],
+            )}
+          </Text>
+          <Text style={styles.characterName}>
+            {JSON.stringify(
+              props.navigation.state.params.passOnCharacter.culture,
+            )}
+          </Text>
 
           <Button
             title="Back"
@@ -46,14 +59,19 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
 
+  modalBox: {
+    margin: 40,
+    alignItems: 'center',
+  },
+
   characterName: {
     fontSize: 20,
   },
 
-  image: {
-    width: '80%',
-    height: 300,
-  },
+  // image: {
+  //   width: '80%',
+  //   height: 300,
+  // },
 });
 
 export default CharacterDetailsScreen;
