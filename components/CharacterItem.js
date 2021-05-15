@@ -1,14 +1,17 @@
 import React from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, Image, StyleSheet, Text, View} from 'react-native';
 
 const CharacterItem = props => {
   return (
     <View style={styles.characterBox}>
-      <Text>Character Name</Text>
+      <Image source={{uri: props.imageUri}} style={styles.image} />
+      <Text>{props.character.aliases}</Text>
       <Button
         title="View Details"
         onPress={() => props.navigationProps.navigate('CharacterDetailsPage')}
         navigateFurther={props.navigationProps}
+        passOnCharacter={props.character}
+        passOnImageUri={props.imageUri}
       />
     </View>
   );
@@ -27,6 +30,14 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOpacity: 0.26,
     elevation: 8,
+  },
+
+  image: {
+    alignItems: 'center',
+    height: 200,
+    width: '80%',
+    justifyContent: 'center',
+    alignContent: 'center',
   },
 });
 

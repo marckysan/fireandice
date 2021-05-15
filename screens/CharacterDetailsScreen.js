@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, Image, StyleSheet, Text, View} from 'react-native';
 
 const CharacterDetailsScreen = props => {
   console.log(props);
@@ -7,7 +7,9 @@ const CharacterDetailsScreen = props => {
     <View>
       <View style={styles.modalBox}>
         <View style={styles.characterDetailsBox}>
-          <Text style={styles.characterName}>Character Name</Text>
+          <Image source={{source: props.imageUri}} styles={styles.image} />
+          <Text style={styles.characterName}>{props.character.aliases}</Text>
+          <Text style={styles.characterName}>{props.character.culture}</Text>
 
           <Button
             title="Back"
@@ -44,13 +46,13 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
 
-  modalBox: {
-    margin: 40,
-    alignItems: 'center',
-  },
-
   characterName: {
     fontSize: 20,
+  },
+
+  image: {
+    width: '80%',
+    height: 300,
   },
 });
 
