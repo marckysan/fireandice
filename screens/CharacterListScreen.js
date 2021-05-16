@@ -1,15 +1,48 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import PageController from '../components//PageController';
 import CharacterItem from '../components/CharacterItem';
+
+import {
+  firstPage,
+  previousPage,
+  nextPage,
+  lastPage,
+} from '../store/actions/PageNavigation';
 
 const CharacterListScreen = props => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const imageUriLink = 'https://picsum.photos/id/';
   const Characters = useSelector(state => state.character);
   const pageQueryString = '?page=';
+
+  const dispatch = useDispatch();
+
+  const firstpage = useCallback(() => {
+    dispatch(firstPage());
+  }, [dispatch]);
+
+  const previousPage = useCallback(() => {
+    dispatch(previousPage(Characters.pageNumber));
+  }, [dispatch, Characters]);
+
+  const nextPage = useCallback(() => {
+    dispatch(nextPage(Characters.pageNumber));
+  }, [dispatch, Characters]);
+
+  const lastPage = useCallback(() => {
+    dispatch(lastPage());
+  }, [dispatch]);
+
+  useEffect(() => {
+    props.navigation.setParams({
+      firstPage: firstpage,
+      previousPage: previousPage,
+      nextPage: nextPage,
+      lastPage: lastPage,
+    });
+  }, [firstPage, previousPage, nextPage, lastPage]);
 
   // console.log(data);
   useEffect(() => {
@@ -31,7 +64,7 @@ const CharacterListScreen = props => {
         navigationProps={props.navigation}
         character={itemData.item}
         Id={data.indexOf(itemData.item) + 1}
-        imageUri={imageUriLink.concat(
+        imageUri={Characters.imageLink.concat(
           data.indexOf(itemData.item) + 1 + (Characters.pageNumber - 1) * 10,
         )}
       />

@@ -11,12 +11,13 @@ export const previousPage = pageNumber => {
   return {type: PREVIOUS_PAGE, pageNumber: pageNumber};
 };
 
-export const firstPage = pageNumber => {
+export const nextPage = pageNumber => {
   return {type: NEXT_PAGE, pageNumber: pageNumber};
 };
 
-export const firstPage = () => {
+export const lastPage = () => {
   return {type: LAST_PAGE, pageNumber: 214};
 };
 
 //last character id = 2138
+//last image id = 1084
