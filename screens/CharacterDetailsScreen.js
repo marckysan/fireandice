@@ -6,8 +6,6 @@ const CharacterDetailsScreen = props => {
   const character = props.navigation.state.params.passOnCharacter;
   const imageUri = props.navigation.state.params.passOnImageUri;
 
-  console.log(character.aliases);
-
   return (
     <View>
       <View style={styles.modalBox}>

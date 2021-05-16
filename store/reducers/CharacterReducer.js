@@ -1,12 +1,12 @@
 import {
   FIRST_PAGE,
-  PREVIOUS_PAGE,
-  NEXT_PAGE,
   LAST_PAGE,
+  NEXT_PAGE,
+  PREVIOUS_PAGE,
 } from '../actions/PageNavigation';
 
 const initialState = {
-  pageNumber: 1,
+  pageNumber: 10,
   pageDisplayLimit: '&pageSize=10',
   apiLink: 'https://www.anapioficeandfire.com/api/characters',
   imageLink: 'https://picsum.photos/id/',

@@ -1,15 +1,8 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import PageController from '../components//PageController';
+import {useDispatch, useSelector} from 'react-redux';
 import CharacterItem from '../components/CharacterItem';
-
-import {
-  firstPage,
-  previousPage,
-  nextPage,
-  lastPage,
-} from '../store/actions/PageNavigation';
+import PageController from '../components/PageController';
 
 const CharacterListScreen = props => {
   const [isLoading, setLoading] = useState(true);
@@ -19,7 +12,7 @@ const CharacterListScreen = props => {
 
   const dispatch = useDispatch();
 
-  const firstpage = useCallback(() => {
+  const firstPage = useCallback(() => {
     dispatch(firstPage());
   }, [dispatch]);
 
@@ -37,7 +30,7 @@ const CharacterListScreen = props => {
 
   useEffect(() => {
     props.navigation.setParams({
-      firstPage: firstpage,
+      firstPage: firstPage,
       previousPage: previousPage,
       nextPage: nextPage,
       lastPage: lastPage,
@@ -45,8 +38,8 @@ const CharacterListScreen = props => {
   }, [firstPage, previousPage, nextPage, lastPage]);
 
   // console.log(data);
-  useEffect(() => {
-    fetch(
+  useEffect(async () => {
+    await fetch(
       Characters.apiLink.concat(
         pageQueryString.concat(Characters.pageNumber),
         Characters.pageDisplayLimit,
@@ -79,7 +72,14 @@ const CharacterListScreen = props => {
         </View>
       ) : (
         <View>
-          <PageController style={styles.pageController} />
+          <PageController
+            firstPage={firstPage}
+            previousPage={previousPage}
+            nextPage={nextPage}
+            lastPage={lastPage}
+            // currentPage={Characters.pageNumber}
+          />
+
           <FlatList
             keyExtractor={(item, index) => data.indexOf(item) + 1}
             data={data}
@@ -105,14 +105,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 300,
   },
-  pageController: {},
+
   flatList: {
     marginBottom: 120,
   },
 });
 
 CharacterListScreen.navigationOptions = {
+  // const nextPage = navigationData.navigation.getParam('nextPage');
+  // return {
   headerTitle: 'Fire and Ice - List Of Characters',
+  //   headerRight: <PageController />,
+  // };
 };
 
 export default CharacterListScreen;

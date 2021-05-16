@@ -6,16 +6,28 @@ const PageController = props => {
 
   return (
     <View style={styles.ButtonBar}>
-      <TouchableOpacity title="First" style={styles.Button}>
+      <TouchableOpacity
+        title="First"
+        style={styles.Button}
+        onPress={props.firstPage}>
         <Text style={styles.ButtonText}>First</Text>
       </TouchableOpacity>
-      <TouchableOpacity title="Previous" style={styles.Button}>
+      <TouchableOpacity
+        title="Previous"
+        style={styles.Button}
+        onPress={props.previousPage}>
         <Text style={styles.ButtonText}>Previous</Text>
       </TouchableOpacity>
-      <TouchableOpacity title="Next" style={styles.Button}>
+      <TouchableOpacity
+        title="Next"
+        style={styles.Button}
+        onPress={props.nextPage}>
         <Text style={styles.ButtonText}>Next</Text>
       </TouchableOpacity>
-      <TouchableOpacity title="Last" style={styles.Button}>
+      <TouchableOpacity
+        title="Last"
+        style={styles.Button}
+        onPress={props.lastPage}>
         <Text style={styles.ButtonText}>Last</Text>
       </TouchableOpacity>
     </View>
