@@ -1,21 +1,25 @@
 import React from 'react';
-import {Button, Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 const CharacterItem = props => {
+  const imageSize = '/200/300';
+
   return (
-    <View style={styles.characterBox}>
-      <Image source={{uri: props.imageUri}} style={styles.image} />
-      <Text>{props.character.aliases}</Text>
-      <Button
-        title="View Details"
-        onPress={() =>
-          props.navigationProps.navigate('CharacterDetailsPage', {
-            passOnCharacter: props.character,
-            passOnImageUri: props.imageUri,
-          })
-        }
-      />
-    </View>
+    <TouchableOpacity
+      onPress={() =>
+        props.navigationProps.navigate('CharacterDetailsPage', {
+          passOnCharacter: props.character,
+          passOnImageUri: props.imageUri,
+        })
+      }>
+      <View style={styles.characterBox}>
+        <Image
+          source={{uri: props.imageUri.concat(imageSize)}}
+          style={styles.image}
+        />
+        <Text style={styles.itemText}>{props.character.aliases}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -32,14 +36,23 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOpacity: 0.26,
     elevation: 8,
+    flexDirection: 'row',
+    alignContent: 'space-between',
   },
 
   image: {
     alignItems: 'center',
-    height: 200,
-    width: '80%',
+    height: 90,
+    width: '30%',
     justifyContent: 'center',
     alignContent: 'center',
+  },
+
+  itemText: {
+    margin: 5,
+    marginTop: 25,
+    fontSize: 15,
+    fontFamily: 'fantasy',
   },
 });
 

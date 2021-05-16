@@ -3,13 +3,16 @@ import {Button, Image, StyleSheet, Text, View} from 'react-native';
 
 const CharacterDetailsScreen = props => {
   console.log(props.navigation.state.params);
+  const imageSize = '/300/400';
   return (
     <View>
       <View style={styles.modalBox}>
         <View style={styles.characterDetailsBox}>
           <Image
             source={{
-              uri: JSON.stringify(props.navigation.state.params.passOnImageUri),
+              uri: JSON.stringify(
+                props.navigation.state.params.passOnImageUri.concat(imageSize),
+              ),
             }}
             styles={styles.image}
           />
@@ -73,5 +76,9 @@ const styles = StyleSheet.create({
   //   height: 300,
   // },
 });
+
+CharacterDetailsScreen.navigationOptions = {
+  headerTitle: 'Character Detail',
+};
 
 export default CharacterDetailsScreen;

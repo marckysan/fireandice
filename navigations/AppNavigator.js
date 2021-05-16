@@ -6,10 +6,24 @@ import CharacterListScreen from '../screens/CharacterListScreen';
 // import FavouriteCharactersScreen from '../screens/FavouriteCharactersScreen';
 // import SearchCharacterScreen from '../screens/SearchCharacterScreen';
 
-const AppNavigator = createStackNavigator({
-  ListPage: CharacterListScreen,
-  CharacterDetailsPage: CharacterDetailsScreen,
-});
+const AppNavigator = createStackNavigator(
+  {
+    ListPage: CharacterListScreen,
+    CharacterDetailsPage: CharacterDetailsScreen,
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#b9540c',
+      },
+      headerTitleStyle: {
+        fontFamily: 'monospace',
+        fontSize: 15,
+      },
+      headerTintColor: 'white',
+    },
+  },
+);
 
 // const CharacterBottomTabNavigator = createBottomTabNavigator({
 //   listPage: CharacterListScreen,
