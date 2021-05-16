@@ -4,6 +4,23 @@ import {Button, Image, StyleSheet, Text, View} from 'react-native';
 const CharacterDetailsScreen = props => {
   console.log(props.navigation.state.params);
   const imageSize = '/300/400';
+  const character = props.navigation.state.params.passOnCharacter;
+
+  function Culture(character) {
+    if (character.culture == '') {
+      return (
+        <Text style={styles.characterName}>
+          {character.alias[0]} does not have a culture.
+        </Text>
+      );
+    } else {
+      return (
+        <Text style={styles.characterName}>
+          {JSON.stringify(character.culture)}
+        </Text>
+      );
+    }
+  }
   return (
     <View>
       <View style={styles.modalBox}>
@@ -16,17 +33,12 @@ const CharacterDetailsScreen = props => {
             }}
             styles={styles.image}
           />
-          <Text style={styles.characterName}>
-            {JSON.stringify(
-              props.navigation.state.params.passOnCharacter.aliases[0],
-            )}
-          </Text>
-          <Text style={styles.characterName}>
-            {JSON.stringify(
-              props.navigation.state.params.passOnCharacter.culture,
-            )}
-          </Text>
-
+          <Text style={styles.characterName}>{character.aliases[0]}</Text>
+          {character.culture == '' ? (
+            <Text>{character.aliases[0]} does not have a culture!</Text>
+          ) : (
+            <Text style={styles.characterName}>{character.culture}</Text>
+          )}
           <Button
             title="Back"
             onPress={() => {

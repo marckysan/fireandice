@@ -7,6 +7,8 @@ const CharacterListScreen = props => {
   const [data, setData] = useState([]);
   const imageUriLink = 'https://picsum.photos/id/';
 
+  console.log(props);
+
   // console.log(data);
 
   useEffect(() => {
