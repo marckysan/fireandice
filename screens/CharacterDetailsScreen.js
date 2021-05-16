@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: '#000',
     padding: 10,
-    marginTop: 22,
+    marginTop: 50,
     height: 500,
 
     // height: 'auto',

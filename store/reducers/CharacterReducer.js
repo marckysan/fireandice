@@ -1,5 +1,6 @@
 const initialState = {
   pageNumber: 1,
+  pageDisplayLimit: '&pageSize=10',
   apiLink: 'https://www.anapioficeandfire.com/api/characters',
   imageLink: 'https://picsum.photos/',
   searchLink: 'https://www.anapioficeandfire.com/api/characters',

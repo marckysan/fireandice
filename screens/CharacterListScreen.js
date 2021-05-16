@@ -1,18 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import PageController from '../components//PageController';
 import CharacterItem from '../components/CharacterItem';
 
 const CharacterListScreen = props => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const imageUriLink = 'https://picsum.photos/id/';
-
-  console.log(props);
+  const Characters = useSelector(state => state.character);
+  const pageQueryString = '?page=';
 
   // console.log(data);
 
   useEffect(() => {
-    fetch('https://www.anapioficeandfire.com/api/characters?page=1&pageSize=10')
+    fetch(
+      Characters.apiLink.concat(
+        pageQueryString.concat(Characters.pageNumber),
+        Characters.pageDisplayLimit,
+      ),
+    )
       .then(response => response.json())
       .then(json => setData(json))
       .catch(error => console.error(error))
@@ -38,6 +45,7 @@ const CharacterListScreen = props => {
         </View>
       ) : (
         <View>
+          <PageController style={styles.pageController} />
           <FlatList
             keyExtractor={(item, index) => data.indexOf(item) + 1}
             data={data}
@@ -62,6 +70,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 300,
   },
+  pageController: {},
 });
 
 CharacterListScreen.navigationOptions = {
