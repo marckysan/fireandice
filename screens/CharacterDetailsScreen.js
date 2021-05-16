@@ -2,26 +2,12 @@ import React from 'react';
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
 
 const CharacterDetailsScreen = props => {
-  console.log(props.navigation.state.params.passOnImageUri);
   const imageSize = '/300/400';
   const character = props.navigation.state.params.passOnCharacter;
   const imageUri = props.navigation.state.params.passOnImageUri;
 
-  function Culture(character) {
-    if (character.culture == '') {
-      return (
-        <Text style={styles.characterName}>
-          {character.alias[0]} does not have a culture.
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.characterName}>
-          {JSON.stringify(character.culture)}
-        </Text>
-      );
-    }
-  }
+  console.log(character.aliases);
+
   return (
     <View>
       <View style={styles.modalBox}>
@@ -32,11 +18,22 @@ const CharacterDetailsScreen = props => {
             }}
             style={styles.image}
           />
-          <Text style={styles.characterName}>Name: {character.aliases[0]}</Text>
+          {character.name == '' ? (
+            <Text style={styles.characterName}>{character.aliases[0]}</Text>
+          ) : (
+            <Text style={styles.characterName}>{character.name}</Text>
+          )}
+
           {character.culture == '' ? (
-            <Text style={styles.characterCulture}>
-              Culture: {character.aliases[0]} does not have a culture!
-            </Text>
+            character.name == '' ? (
+              <Text style={styles.characterCulture}>
+                Culture: {character.aliases[0]} does not have a culture!
+              </Text>
+            ) : (
+              <Text style={styles.characterCulture}>
+                Culture: {character.name} does not have a culture!
+              </Text>
+            )
           ) : (
             <Text style={styles.characterCulture}>
               Culture: {character.culture}
@@ -99,11 +96,12 @@ const styles = StyleSheet.create({
     width: '80%',
     height: 300,
     paddingBottom: 3,
+    borderRadius: 10,
   },
 });
 
 CharacterDetailsScreen.navigationOptions = {
-  headerTitle: 'Character Detail',
+  headerTitle: 'Character Details',
 };
 
 export default CharacterDetailsScreen;

@@ -12,7 +12,6 @@ const CharacterListScreen = props => {
   const pageQueryString = '?page=';
 
   // console.log(data);
-
   useEffect(() => {
     fetch(
       Characters.apiLink.concat(
@@ -32,7 +31,9 @@ const CharacterListScreen = props => {
         navigationProps={props.navigation}
         character={itemData.item}
         Id={data.indexOf(itemData.item) + 1}
-        imageUri={imageUriLink.concat(data.indexOf(itemData.item) + 1)}
+        imageUri={imageUriLink.concat(
+          data.indexOf(itemData.item) + 1 + (Characters.pageNumber - 1) * 10,
+        )}
       />
     );
   };
@@ -50,6 +51,7 @@ const CharacterListScreen = props => {
             keyExtractor={(item, index) => data.indexOf(item) + 1}
             data={data}
             renderItem={renderCharacterItem}
+            style={styles.flatList}
           />
         </View>
       )}
@@ -71,6 +73,9 @@ const styles = StyleSheet.create({
     marginTop: 300,
   },
   pageController: {},
+  flatList: {
+    marginBottom: 120,
+  },
 });
 
 CharacterListScreen.navigationOptions = {
