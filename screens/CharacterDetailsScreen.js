@@ -2,9 +2,10 @@ import React from 'react';
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
 
 const CharacterDetailsScreen = props => {
-  console.log(props.navigation.state.params);
+  console.log(props.navigation.state.params.passOnImageUri);
   const imageSize = '/300/400';
   const character = props.navigation.state.params.passOnCharacter;
+  const imageUri = props.navigation.state.params.passOnImageUri;
 
   function Culture(character) {
     if (character.culture == '') {
@@ -27,17 +28,19 @@ const CharacterDetailsScreen = props => {
         <View style={styles.characterDetailsBox}>
           <Image
             source={{
-              uri: JSON.stringify(
-                props.navigation.state.params.passOnImageUri.concat(imageSize),
-              ),
+              uri: imageUri.concat(imageSize),
             }}
-            styles={styles.image}
+            style={styles.image}
           />
-          <Text style={styles.characterName}>{character.aliases[0]}</Text>
+          <Text style={styles.characterName}>Name: {character.aliases[0]}</Text>
           {character.culture == '' ? (
-            <Text>{character.aliases[0]} does not have a culture!</Text>
+            <Text style={styles.characterCulture}>
+              Culture: {character.aliases[0]} does not have a culture!
+            </Text>
           ) : (
-            <Text style={styles.characterName}>{character.culture}</Text>
+            <Text style={styles.characterCulture}>
+              Culture: {character.culture}
+            </Text>
           )}
           <Button
             title="Back"
@@ -59,8 +62,9 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     padding: 10,
     marginTop: 22,
+    height: 500,
 
-    height: 'auto',
+    // height: 'auto',
     width: 310,
     justifyContent: 'center',
     alignContent: 'center',
@@ -80,12 +84,22 @@ const styles = StyleSheet.create({
 
   characterName: {
     fontSize: 20,
+    marginTop: 8,
+    paddingBottom: 3,
   },
-
-  // image: {
-  //   width: '80%',
-  //   height: 300,
-  // },
+  characterCulture: {
+    fontSize: 15,
+    marginTop: 5,
+    paddingBottom: 10,
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    width: '80%',
+    height: 300,
+    paddingBottom: 3,
+  },
 });
 
 CharacterDetailsScreen.navigationOptions = {
