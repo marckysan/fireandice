@@ -47,7 +47,6 @@ const CharacterDetailsScreen = props => {
           />
         </View>
       </View>
-      {/* </Modal> */}
     </View>
   );
 };

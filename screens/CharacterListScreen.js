@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
 import CharacterItem from '../components/CharacterItem';
 
 const CharacterListScreen = props => {
@@ -32,16 +32,19 @@ const CharacterListScreen = props => {
 
   return (
     <View>
-      {/* <View styles="styles.headerContainer">
-        <Header />
-      </View> */}
-      <View>
-        <FlatList
-          keyExtractor={(item, index) => data.indexOf(item) + 1}
-          data={data}
-          renderItem={renderCharacterItem}
-        />
-      </View>
+      {isLoading ? (
+        <View style={styles.ActivityIndicator}>
+          <ActivityIndicator size="large" color="#b9540c" />
+        </View>
+      ) : (
+        <View>
+          <FlatList
+            keyExtractor={(item, index) => data.indexOf(item) + 1}
+            data={data}
+            renderItem={renderCharacterItem}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -52,6 +55,12 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     height: 300,
+  },
+  ActivityIndicator: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    marginTop: 300,
   },
 });
 
