@@ -3,6 +3,12 @@ export const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
 export const NEXT_PAGE = 'NEXT_PAGE';
 export const LAST_PAGE = 'LAST_PAGE';
 
+// Add API calls into each method, then getState each page and then paste in accordingly.
+// Since each getState retrieves the current state, we can do conditional calls to decide how to update
+// the new state can then be set inside the reducer, then update the state in the store
+// Since the store state is updated, we can safely retrieve the value inside the store from the Screen
+// and then retrieve the page number inside the screen to retreive images from the image API
+
 export const firstPage = () => {
   return {type: FIRST_PAGE, pageNumber: 1};
 };

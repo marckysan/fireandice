@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   pageNumber: 10,
+  pageQueryString: '?page=',
   pageDisplayLimit: '&pageSize=10',
   apiLink: 'https://www.anapioficeandfire.com/api/characters',
   imageLink: 'https://picsum.photos/id/',
