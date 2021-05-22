@@ -15,12 +15,24 @@ const CharacterListScreen = props => {
   const [data, setData] = useState([]);
   const Characters = useSelector(state => state.character);
   const pageQueryString = '?page=';
-  console.log('1.0');
 
   const dispatch = useDispatch();
 
   const firstPage = useCallback(() => {
+    setLoading(true);
+    console.log('1.0: ' + Characters.pageNumber);
     dispatch({type: FIRST_PAGE});
+    console.log('1.1: ' + Characters.pageNumber);
+    fetch(
+      Characters.apiLink.concat(
+        pageQueryString.concat(1),
+        Characters.pageDisplayLimit,
+      ),
+    )
+      .then(response => response.json())
+      .then(json => setData(json))
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false));
   }, [dispatch]);
 
   const previousPage = useCallback(() => {
@@ -32,7 +44,18 @@ const CharacterListScreen = props => {
   }, [dispatch, Characters]);
 
   const lastPage = useCallback(() => {
+    setLoading(true);
     dispatch({type: LAST_PAGE});
+    fetch(
+      Characters.apiLink.concat(
+        pageQueryString.concat(214),
+        Characters.pageDisplayLimit,
+      ),
+    )
+      .then(response => response.json())
+      .then(json => setData(json))
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false));
   }, [dispatch]);
 
   useEffect(() => {
