@@ -6,7 +6,7 @@ import {
 } from '../actions/PageNavigation';
 
 const initialState = {
-  pageNumber: 10,
+  pageNumber: 1,
   pageQueryString: '?page=',
   pageDisplayLimit: '&pageSize=10',
   apiLink: 'https://www.anapioficeandfire.com/api/characters',
