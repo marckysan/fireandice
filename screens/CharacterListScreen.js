@@ -38,31 +38,39 @@ const CharacterListScreen = props => {
   const previousPage = useCallback(() => {
     setLoading(true);
     dispatch({type: PREVIOUS_PAGE});
-    fetch(
-      Characters.apiLink.concat(
-        pageQueryString.concat(Characters.pageNumber - 1),
-        Characters.pageDisplayLimit,
-      ),
-    )
-      .then(response => response.json())
-      .then(json => setData(json))
-      .catch(error => console.error(error))
-      .finally(() => setLoading(false));
+    if (Characters.pageNumber !== 1) {
+      fetch(
+        Characters.apiLink.concat(
+          pageQueryString.concat(Characters.pageNumber - 1),
+          Characters.pageDisplayLimit,
+        ),
+      )
+        .then(response => response.json())
+        .then(json => setData(json))
+        .catch(error => console.error(error))
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(false);
+    }
   }, [dispatch, Characters]);
 
   const nextPage = useCallback(() => {
     setLoading(true);
     dispatch({type: NEXT_PAGE});
-    fetch(
-      Characters.apiLink.concat(
-        pageQueryString.concat(Characters.pageNumber + 1),
-        Characters.pageDisplayLimit,
-      ),
-    )
-      .then(response => response.json())
-      .then(json => setData(json))
-      .catch(error => console.error(error))
-      .finally(() => setLoading(false));
+    if (Characters.pageNumber !== 214) {
+      fetch(
+        Characters.apiLink.concat(
+          pageQueryString.concat(Characters.pageNumber + 1),
+          Characters.pageDisplayLimit,
+        ),
+      )
+        .then(response => response.json())
+        .then(json => setData(json))
+        .catch(error => console.error(error))
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(false);
+    }
   }, [dispatch, Characters]);
 
   const lastPage = useCallback(() => {
