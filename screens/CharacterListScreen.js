@@ -36,11 +36,33 @@ const CharacterListScreen = props => {
   }, [dispatch]);
 
   const previousPage = useCallback(() => {
+    setLoading(true);
     dispatch({type: PREVIOUS_PAGE});
+    fetch(
+      Characters.apiLink.concat(
+        pageQueryString.concat(Characters.pageNumber - 1),
+        Characters.pageDisplayLimit,
+      ),
+    )
+      .then(response => response.json())
+      .then(json => setData(json))
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false));
   }, [dispatch, Characters]);
 
   const nextPage = useCallback(() => {
+    setLoading(true);
     dispatch({type: NEXT_PAGE});
+    fetch(
+      Characters.apiLink.concat(
+        pageQueryString.concat(Characters.pageNumber + 1),
+        Characters.pageDisplayLimit,
+      ),
+    )
+      .then(response => response.json())
+      .then(json => setData(json))
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false));
   }, [dispatch, Characters]);
 
   const lastPage = useCallback(() => {
