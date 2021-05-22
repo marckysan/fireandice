@@ -22,14 +22,14 @@ const CharacterReducer = (state = initialState, action) => {
       return {...state, pageNumber: 1};
     case PREVIOUS_PAGE:
       const prevPageCurrentPage = state.pageNumber;
-      if (currentPage == 1) {
+      if (prevPageCurrentPage == 1) {
         return {...state};
       } else {
         return {...state, pageNumber: prevPageCurrentPage - 1};
       }
     case NEXT_PAGE:
       const nextPageCurrentPage = state.pageNumber;
-      if (currentPage == 214) {
+      if (nextPageCurrentPage == 214) {
         return {...state};
       } else {
         return {...state, pageNumber: nextPageCurrentPage + 1};

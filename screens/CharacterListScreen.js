@@ -3,29 +3,36 @@ import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CharacterItem from '../components/CharacterItem';
 import PageController from '../components/PageController';
+import {
+  FIRST_PAGE,
+  LAST_PAGE,
+  NEXT_PAGE,
+  PREVIOUS_PAGE,
+} from '../store/actions/PageNavigation';
 
 const CharacterListScreen = props => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const Characters = useSelector(state => state.character);
   const pageQueryString = '?page=';
+  console.log('1.0');
 
   const dispatch = useDispatch();
 
   const firstPage = useCallback(() => {
-    dispatch(firstPage());
+    dispatch({type: FIRST_PAGE});
   }, [dispatch]);
 
   const previousPage = useCallback(() => {
-    dispatch(previousPage(Characters.pageNumber));
+    dispatch({type: PREVIOUS_PAGE});
   }, [dispatch, Characters]);
 
   const nextPage = useCallback(() => {
-    dispatch(nextPage(Characters.pageNumber));
+    dispatch({type: NEXT_PAGE});
   }, [dispatch, Characters]);
 
   const lastPage = useCallback(() => {
-    dispatch(lastPage());
+    dispatch({type: LAST_PAGE});
   }, [dispatch]);
 
   useEffect(() => {

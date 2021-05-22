@@ -3,7 +3,6 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 const CharacterItem = props => {
   const imageSize = '/200/300';
-  console.log(props.character.aliases[0]);
 
   return (
     <TouchableOpacity
