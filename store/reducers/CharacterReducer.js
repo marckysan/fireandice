@@ -30,6 +30,7 @@ const CharacterReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         characters: action.payload,
+        pageNumber: action.pageNum,
         error: '',
       };
     case FETCH_DATA_ERROR:

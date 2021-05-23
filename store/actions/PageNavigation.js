@@ -19,10 +19,11 @@ export const fetchDataRequest = () => {
   };
 };
 
-export const fetchDataSuccess = data => {
+export const fetchDataSuccess = (data, pageNum) => {
   return {
     type: FETCH_DATA_SUCCESS,
     payload: data,
+    pageNum: pageNum,
   };
 };
 
@@ -46,75 +47,102 @@ export function fetchInitialData() {
       );
 
       let characters = await response.json();
-      // console.log(characters);
-      dispatch(fetchDataSuccess(characters));
-      console.log(getState().character.characters);
+      dispatch(fetchDataSuccess(characters, getState().character.pageNumber));
     } catch (error) {
       const errorMsg = error.message;
       dispatch(fetchDataFailure(errorMsg));
     }
-    // await fetch(
-    //   getState().character.apiLink.concat(
-    //     getState().character.pageQueryString,
-    //     getState().character.pageNumber,
-    //     getState().character.pageDisplayLimit,
-    //   ),
-    // )
-    // .then(response => {
-    //   characters = response.json();
-    //   console.log(characters);
-    //   dispatch(fetchDataSuccess(characters));
-    // })
-    // .catch(error => {
-    //   const errorMsg = error.message;
-    //   dispatch(fetchDataFailure(errorMsg));
-    // });
   };
 }
 
 export function nextPage(pageNumber) {
   return async (dispatch, getState) => {
-    await dispatch(fetchDataRequest);
-    console.log('Loading status: ' + getState().characters.isLoading);
-    // console.log('PageNumber: ' + pageNumber);
+    dispatch(fetchDataRequest);
     if (pageNumber !== 214) {
-      await fetch(
-        getState().character.apiLink.concat(
-          getState().character.pageQueryString,
-          pageNumber + 1,
-          getState().character.pageDisplayLimit,
-        ),
-      )
-        .then(response => {
-          characters = response.json();
-          console.log('Next Page Action: ' + response);
-          dispatch(fetchDataSuccess(characters));
-        })
-        .catch(error => {
-          const errorMsg = error.message;
-          dispatch(fetchDataFailure(errorMsg));
-        });
+      try {
+        let response = await fetch(
+          getState().character.apiLink.concat(
+            getState().character.pageQueryString,
+            pageNumber + 1,
+            getState().character.pageDisplayLimit,
+          ),
+        );
+
+        let characters = await response.json();
+        dispatch(fetchDataSuccess(characters, pageNumber + 1));
+      } catch (error) {
+        const errorMsg = error.message;
+        dispatch(fetchDataFailure(errorMsg));
+      }
     } else {
-      dispatch(fetchDataSuccess(getState().character.characters));
+      dispatch(fetchDataSuccess(getState().character.characters, pageNumber));
     }
   };
 }
 
-// export const firstPage = () => {
-//   return {type: FIRST_PAGE, pageNumber: 1};
-// };
+export function prevPage(pageNumber) {
+  return async (dispatch, getState) => {
+    dispatch(fetchDataRequest);
+    if (pageNumber !== 1) {
+      try {
+        let response = await fetch(
+          getState().character.apiLink.concat(
+            getState().character.pageQueryString,
+            pageNumber - 1,
+            getState().character.pageDisplayLimit,
+          ),
+        );
 
-// export const previousPage = pageNumber => {
-//   return {type: PREVIOUS_PAGE, pageNumber: pageNumber};
-// };
+        let characters = await response.json();
+        dispatch(fetchDataSuccess(characters, pageNumber - 1));
+      } catch (error) {
+        const errorMsg = error.message;
+        dispatch(fetchDataFailure(errorMsg));
+      }
+    } else {
+      dispatch(fetchDataSuccess(getState().character.characters, pageNumber));
+    }
+  };
+}
 
-// export const nextPage = pageNumber => {
-//   return {type: NEXT_PAGE, pageNumber: pageNumber};
-// };
+export function firstPage() {
+  return async (dispatch, getState) => {
+    dispatch(fetchDataRequest);
+    try {
+      let response = await fetch(
+        getState().character.apiLink.concat(
+          getState().character.pageQueryString,
+          1,
+          getState().character.pageDisplayLimit,
+        ),
+      );
 
-// export const lastPage = () => {
-//   return {type: LAST_PAGE, pageNumber: 214};
-// };
+      let characters = await response.json();
+      dispatch(fetchDataSuccess(characters, 1));
+    } catch (error) {
+      const errorMsg = error.message;
+      dispatch(fetchDataFailure(errorMsg));
+    }
+  };
+}
 
-//last character id = 2138
-//last image id = 1084
+export function lastPage() {
+  return async (dispatch, getState) => {
+    dispatch(fetchDataRequest);
+    try {
+      let response = await fetch(
+        getState().character.apiLink.concat(
+          getState().character.pageQueryString,
+          214,
+          getState().character.pageDisplayLimit,
+        ),
+      );
+
+      let characters = await response.json();
+      dispatch(fetchDataSuccess(characters, 214));
+    } catch (error) {
+      const errorMsg = error.message;
+      dispatch(fetchDataFailure(errorMsg));
+    }
+  };
+}

@@ -3,7 +3,13 @@ import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CharacterItem from '../components/CharacterItem';
 import PageController from '../components/PageController';
-import {fetchInitialData, nextPage} from '../store/actions/PageNavigation';
+import {
+  fetchInitialData,
+  nextPage,
+  prevPage,
+  firstPage,
+  lastPage,
+} from '../store/actions/PageNavigation';
 
 const CharacterListScreen = props => {
   const [data, setData] = useState([]);
@@ -13,13 +19,26 @@ const CharacterListScreen = props => {
 
   useEffect(async () => {
     await dispatch(fetchInitialData());
-    console.log('Init Page: ' + Characters.characters);
-    // setData(Characters.characters);
   }, []);
 
-  const nextpage = useCallback(() => {
-    dispatch(nextPage(Characters.pageNumber));
+  const nextpage = useCallback(async () => {
+    await dispatch(nextPage(Characters.pageNumber));
     console.log('Next Page: ' + Characters);
+  });
+
+  const prevpage = useCallback(async () => {
+    await dispatch(prevPage(Characters.pageNumber));
+    console.log('Prev Page: ' + Characters);
+  });
+
+  const firstpage = useCallback(async () => {
+    await dispatch(firstPage());
+    console.log('First Page: ' + Characters);
+  });
+
+  const lastpage = useCallback(async () => {
+    await dispatch(lastPage());
+    console.log('Last Page: ' + Characters);
   });
 
   const renderCharacterItem = itemData => {
@@ -46,11 +65,10 @@ const CharacterListScreen = props => {
       ) : (
         <View>
           <PageController
-            // firstPage={firstPage}
-            // previousPage={previousPage}
+            firstPage={firstpage}
+            previousPage={prevpage}
             nextPage={nextpage}
-            // lastPage={lastPage}
-            // currentPage={Characters.pageNumber}
+            lastPage={lastpage}
           />
 
           <FlatList
@@ -95,96 +113,3 @@ CharacterListScreen.navigationOptions = {
 };
 
 export default CharacterListScreen;
-
-// const firstPage = useCallback(() => {
-//   setLoading(true);
-//   console.log('1.0: ' + Characters.pageNumber);
-//   dispatch({type: FIRST_PAGE});
-//   console.log('1.1: ' + Characters.pageNumber);
-//   fetch(
-//     Characters.apiLink.concat(
-//       pageQueryString.concat(1),
-//       Characters.pageDisplayLimit,
-//     ),
-//   )
-//     .then(response => response.json())
-//     .then(json => setData(json))
-//     .catch(error => console.error(error))
-//     .finally(() => setLoading(false));
-// }, [dispatch]);
-
-// const previousPage = useCallback(() => {
-//   setLoading(true);
-//   dispatch({type: PREVIOUS_PAGE});
-//   if (Characters.pageNumber !== 1) {
-//     fetch(
-//       Characters.apiLink.concat(
-//         pageQueryString.concat(Characters.pageNumber - 1),
-//         Characters.pageDisplayLimit,
-//       ),
-//     )
-//       .then(response => response.json())
-//       .then(json => setData(json))
-//       .catch(error => console.error(error))
-//       .finally(() => setLoading(false));
-//   } else {
-//     setLoading(false);
-//   }
-// }, [dispatch, Characters]);
-
-// const nextPage = useCallback(() => {
-//   setLoading(true);
-//   dispatch({type: NEXT_PAGE});
-//   if (Characters.pageNumber !== 214) {
-//     fetch(
-//       Characters.apiLink.concat(
-//         pageQueryString.concat(Characters.pageNumber + 1),
-//         Characters.pageDisplayLimit,
-//       ),
-//     )
-//       .then(response => response.json())
-//       .then(json => setData(json))
-//       .catch(error => console.error(error))
-//       .finally(() => setLoading(false));
-//   } else {
-//     setLoading(false);
-//   }
-// }, [dispatch, Characters]);
-
-// const lastPage = useCallback(() => {
-//   setLoading(true);
-//   dispatch({type: LAST_PAGE});
-//   fetch(
-//     Characters.apiLink.concat(
-//       pageQueryString.concat(214),
-//       Characters.pageDisplayLimit,
-//     ),
-//   )
-//     .then(response => response.json())
-//     .then(json => setData(json))
-//     .catch(error => console.error(error))
-//     .finally(() => setLoading(false));
-// }, [dispatch]);
-
-// useEffect(() => {
-//   props.navigation.setParams({
-//     firstPage: firstPage,
-//     previousPage: previousPage,
-//     nextPage: nextPage,
-//     lastPage: lastPage,
-//   });
-// }, [firstPage, previousPage, nextPage, lastPage]);
-
-// console.log(data);
-// useEffect(async () => {
-//   await fetch(
-//     Characters.apiLink.concat(
-//       pageQueryString.concat(Characters.pageNumber),
-//       Characters.pageDisplayLimit,
-//     ),
-//   )
-//     .then(response => response.json())
-//     .then(json => setData(json))
-//     .catch(error => console.error(error))
-//     .finally(() => setLoading(false));
-// }, []);
