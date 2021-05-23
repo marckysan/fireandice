@@ -35,22 +35,68 @@ export const fetchDataFailure = error => {
 
 export function fetchInitialData() {
   return async (dispatch, getState) => {
-    console.log(getState());
     dispatch(fetchDataRequest);
-    await fetch(
-      getState().character.apiLink.concat(getState().character.pageQueryString),
-      getState().character.pageNumber,
-      getState().character.pageDisplayLimit,
-    )
-      .then(response => {
-        characters = response.json();
-        // console.log(characters);
-        dispatch(fetchDataSuccess(characters));
-      })
-      .catch(error => {
-        const errorMsg = error.message;
-        dispatch(fetchDataFailure(errorMsg));
-      });
+    try {
+      let response = await fetch(
+        getState().character.apiLink.concat(
+          getState().character.pageQueryString,
+          getState().character.pageNumber,
+          getState().character.pageDisplayLimit,
+        ),
+      );
+
+      let characters = await response.json();
+      // console.log(characters);
+      dispatch(fetchDataSuccess(characters));
+      console.log(getState().character.characters);
+    } catch (error) {
+      const errorMsg = error.message;
+      dispatch(fetchDataFailure(errorMsg));
+    }
+    // await fetch(
+    //   getState().character.apiLink.concat(
+    //     getState().character.pageQueryString,
+    //     getState().character.pageNumber,
+    //     getState().character.pageDisplayLimit,
+    //   ),
+    // )
+    // .then(response => {
+    //   characters = response.json();
+    //   console.log(characters);
+    //   dispatch(fetchDataSuccess(characters));
+    // })
+    // .catch(error => {
+    //   const errorMsg = error.message;
+    //   dispatch(fetchDataFailure(errorMsg));
+    // });
+  };
+}
+
+export function nextPage(pageNumber) {
+  return async (dispatch, getState) => {
+    await dispatch(fetchDataRequest);
+    console.log('Loading status: ' + getState().characters.isLoading);
+    // console.log('PageNumber: ' + pageNumber);
+    if (pageNumber !== 214) {
+      await fetch(
+        getState().character.apiLink.concat(
+          getState().character.pageQueryString,
+          pageNumber + 1,
+          getState().character.pageDisplayLimit,
+        ),
+      )
+        .then(response => {
+          characters = response.json();
+          console.log('Next Page Action: ' + response);
+          dispatch(fetchDataSuccess(characters));
+        })
+        .catch(error => {
+          const errorMsg = error.message;
+          dispatch(fetchDataFailure(errorMsg));
+        });
+    } else {
+      dispatch(fetchDataSuccess(getState().character.characters));
+    }
   };
 }
 
