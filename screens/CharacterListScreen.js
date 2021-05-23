@@ -12,7 +12,6 @@ import {
 } from '../store/actions/PageNavigation';
 
 const CharacterListScreen = props => {
-  const [data, setData] = useState([]);
   const Characters = useSelector(state => state.character);
 
   const dispatch = useDispatch();
