@@ -11,7 +11,7 @@ import CharacterReducer from './store/reducers/CharacterReducer';
 const rootReducer = combineReducers({
   character: CharacterReducer,
 });
-const store = createStore(
+export const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk)),
 );
@@ -27,4 +27,4 @@ const App = () => {
 
 const styles = StyleSheet.create({});
 
-export default App;
+export {App};

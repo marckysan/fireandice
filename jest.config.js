@@ -1,30 +1,7 @@
-// jest.config.js
-// Sync object
-/** @type {import('@jest/types').Config.InitialOptions} */
-const config = {
-  verbose: true,
-};
-
-module.exports = config;
-
-// Or async function
-module.exports = async () => {
-  return {
-    verbose: true,
-  };
-};
-
-// jest.config.js
-const {defaults} = require('jest-config');
-module.exports = {
-  // ...
-  moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
-  // ...
-};
-
 module.exports = {
   preset: 'react-native',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  rootDir: './',
   transformIgnorePatterns: [
     // 'node_modules/(?!(jest-)?react-native|@?react-navigation|@react-native-community/async-storage/(?!(lib)))',
     'node_modules/(?!(jest-)?@?react-native|@react-native-community|@?react-navigation)',
@@ -36,4 +13,23 @@ module.exports = {
   setupFiles: ['./jest_setup.js'],
   preset: 'react-native',
   setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
+  collectCoverage: true,
+  // collectCoverageFrom: ['../screens/*.js'],
+  collectCoverageFrom: [
+    '**/*.{js,jsx}',
+    '!**/node_modules/**',
+    '!**/coverage/**',
+    '!**/index.js',
+    '!**/.eslintrc.js',
+    '!**.prettierrc.js',
+    '!**/babel.config.js',
+    '!**/jest.config.js',
+    '!**/metro.config.js',
+  ],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    'package.json',
+    'package-lock.json',
+  ],
+  coverageDirectory: '../coverage',
 };
