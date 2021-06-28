@@ -5,39 +5,51 @@ import CharacterItem from '../components/CharacterItem';
 import PageController from '../components/PageController';
 import {
   fetchInitialData,
-  nextPage,
-  prevPage,
   firstPage,
   lastPage,
+  nextPage,
+  prevPage,
 } from '../store/actions/PageNavigation';
 
 const CharacterListScreen = props => {
   const Characters = useSelector(state => state.character);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const dispatch = useDispatch();
 
   useEffect(async () => {
+    setIsLoading(true);
     await dispatch(fetchInitialData());
+    setIsLoading(false);
   }, []);
 
   const nextpage = useCallback(async () => {
+    setIsLoading(true);
     await dispatch(nextPage(Characters.pageNumber));
     console.log('Next Page: ' + Characters);
+    setIsLoading(false);
   });
 
   const prevpage = useCallback(async () => {
+    setIsLoading(true);
     await dispatch(prevPage(Characters.pageNumber));
     console.log('Prev Page: ' + Characters);
+    setIsLoading(false);
   });
 
   const firstpage = useCallback(async () => {
+    setIsLoading(true);
     await dispatch(firstPage());
     console.log('First Page: ' + Characters);
+    setIsLoading(false);
   });
 
   const lastpage = useCallback(async () => {
+    setIsLoading(true);
     await dispatch(lastPage());
     console.log('Last Page: ' + Characters);
+    setIsLoading(false);
   });
 
   const renderCharacterItem = itemData => {
@@ -57,19 +69,18 @@ const CharacterListScreen = props => {
 
   return (
     <View>
-      {Characters.isLoading ? (
+      <PageController
+        firstPage={firstpage}
+        previousPage={prevpage}
+        nextPage={nextpage}
+        lastPage={lastpage}
+      />
+      {isLoading ? (
         <View style={styles.ActivityIndicator}>
           <ActivityIndicator size="large" color="#b9540c" />
         </View>
       ) : (
         <View>
-          <PageController
-            firstPage={firstpage}
-            previousPage={prevpage}
-            nextPage={nextpage}
-            lastPage={lastpage}
-          />
-
           <FlatList
             keyExtractor={(item, index) =>
               Characters.characters.indexOf(item) + 1

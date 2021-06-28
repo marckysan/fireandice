@@ -31,5 +31,5 @@ module.exports = {
     'package.json',
     'package-lock.json',
   ],
-  coverageDirectory: '../coverage',
+  coverageDirectory: './coverage',
 };
