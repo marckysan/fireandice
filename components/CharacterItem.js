@@ -17,7 +17,7 @@ const CharacterItem = props => {
           source={{uri: props.imageUri.concat(imageSize)}}
           style={styles.image}
         />
-        {props.character.name == '' ? (
+        {props.character.name === '' ? (
           <Text style={styles.itemText}>{props.character.aliases[0]}</Text>
         ) : (
           <Text style={styles.itemText}>{props.character.name}</Text>

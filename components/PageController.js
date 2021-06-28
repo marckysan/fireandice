@@ -2,8 +2,6 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 const PageController = props => {
-  const pageQueryString = '?page=';
-
   return (
     <View style={styles.ButtonBar}>
       <TouchableOpacity
@@ -40,7 +38,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     marginBottom: 15,
     alignItems: 'center',
-    alignItems: 'center',
+    alignContent: 'center',
     justifyContent: 'space-around',
     borderRadius: 10,
   },

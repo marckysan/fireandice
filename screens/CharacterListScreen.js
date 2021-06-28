@@ -18,39 +18,42 @@ const CharacterListScreen = props => {
 
   const dispatch = useDispatch();
 
-  useEffect(async () => {
+  useEffect(() => {
     setIsLoading(true);
-    await dispatch(fetchInitialData());
+    async function fetchData() {
+      await dispatch(fetchInitialData());
+    }
+    fetchData();
     setIsLoading(false);
-  }, []);
+  }, [dispatch]);
 
   const nextpage = useCallback(async () => {
     setIsLoading(true);
     await dispatch(nextPage(Characters.pageNumber));
     console.log('Next Page: ' + Characters);
     setIsLoading(false);
-  });
+  }, [dispatch, Characters]);
 
   const prevpage = useCallback(async () => {
     setIsLoading(true);
     await dispatch(prevPage(Characters.pageNumber));
     console.log('Prev Page: ' + Characters);
     setIsLoading(false);
-  });
+  }, [dispatch, Characters]);
 
   const firstpage = useCallback(async () => {
     setIsLoading(true);
     await dispatch(firstPage());
     console.log('First Page: ' + Characters);
     setIsLoading(false);
-  });
+  }, [dispatch, Characters]);
 
   const lastpage = useCallback(async () => {
     setIsLoading(true);
     await dispatch(lastPage());
     console.log('Last Page: ' + Characters);
     setIsLoading(false);
-  });
+  }, [dispatch, Characters]);
 
   const renderCharacterItem = itemData => {
     return (

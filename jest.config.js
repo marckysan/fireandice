@@ -11,7 +11,6 @@ module.exports = {
     '**/?(*.)+(spec|test).[jt]s?(x)',
   ],
   setupFiles: ['./jest_setup.js'],
-  preset: 'react-native',
   setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
   collectCoverage: true,
   // collectCoverageFrom: ['../screens/*.js'],

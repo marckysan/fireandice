@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.57% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/35</span>
+                <span class='fraction'>18/36</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/9</span>
+                <span class='fraction'>4/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">47.06% </span>
+                <span class="strong">48.57% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/34</span>
+                <span class='fraction'>17/35</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -182,7 +182,10 @@
 <a name='L123'></a><a href='#L123'>123</a>
 <a name='L124'></a><a href='#L124'>124</a>
 <a name='L125'></a><a href='#L125'>125</a>
-<a name='L126'></a><a href='#L126'>126</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -204,6 +207,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -327,39 +333,42 @@ const CharacterListScreen = props =&gt; {
 &nbsp;
   const dispatch = useDispatch();
 &nbsp;
-  useEffect(async () =&gt; {
+  useEffect(() =&gt; {
     setIsLoading(true);
-    await dispatch(fetchInitialData());
+    async function fetchData() {
+      await dispatch(fetchInitialData());
+    }
+    fetchData();
     setIsLoading(false);
-  }, []);
+  }, [dispatch]);
 &nbsp;
   const nextpage = useCallback(<span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
 <span class="cstat-no" title="statement not covered" >    setIsLoading(true);</span>
 <span class="cstat-no" title="statement not covered" >    await dispatch(nextPage(Characters.pageNumber));</span>
 <span class="cstat-no" title="statement not covered" >    console.log('Next Page: ' + Characters);</span>
 <span class="cstat-no" title="statement not covered" >    setIsLoading(false);</span>
-  });
+  }, [dispatch, Characters]);
 &nbsp;
   const prevpage = useCallback(<span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
 <span class="cstat-no" title="statement not covered" >    setIsLoading(true);</span>
 <span class="cstat-no" title="statement not covered" >    await dispatch(prevPage(Characters.pageNumber));</span>
 <span class="cstat-no" title="statement not covered" >    console.log('Prev Page: ' + Characters);</span>
 <span class="cstat-no" title="statement not covered" >    setIsLoading(false);</span>
-  });
+  }, [dispatch, Characters]);
 &nbsp;
   const firstpage = useCallback(<span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
 <span class="cstat-no" title="statement not covered" >    setIsLoading(true);</span>
 <span class="cstat-no" title="statement not covered" >    await dispatch(firstPage());</span>
 <span class="cstat-no" title="statement not covered" >    console.log('First Page: ' + Characters);</span>
 <span class="cstat-no" title="statement not covered" >    setIsLoading(false);</span>
-  });
+  }, [dispatch, Characters]);
 &nbsp;
   const lastpage = useCallback(<span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
 <span class="cstat-no" title="statement not covered" >    setIsLoading(true);</span>
 <span class="cstat-no" title="statement not covered" >    await dispatch(lastPage());</span>
 <span class="cstat-no" title="statement not covered" >    console.log('Last Page: ' + Characters);</span>
 <span class="cstat-no" title="statement not covered" >    setIsLoading(false);</span>
-  });
+  }, [dispatch, Characters]);
 &nbsp;
   const renderCharacterItem = <span class="fstat-no" title="function not covered" >it</span>emData =&gt; {
 <span class="cstat-no" title="statement not covered" >    return (</span>
@@ -439,7 +448,7 @@ export default CharacterListScreen;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Jun 28 2021 14:45:32 GMT+0800 (Singapore Standard Time)
+                at Mon Jun 28 2021 15:01:34 GMT+0800 (Singapore Standard Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

@@ -16,14 +16,14 @@ const CharacterDetailsScreen = props => {
             }}
             style={styles.image}
           />
-          {character.name == '' ? (
+          {character.name === '' ? (
             <Text style={styles.characterName}>{character.aliases[0]}</Text>
           ) : (
             <Text style={styles.characterName}>{character.name}</Text>
           )}
 
-          {character.culture == '' ? (
-            character.name == '' ? (
+          {character.culture === '' ? (
+            character.name === '' ? (
               <Text style={styles.characterCulture}>
                 Culture: {character.aliases[0]} does not have a culture!
               </Text>

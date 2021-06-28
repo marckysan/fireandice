@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Text, View} from 'react-native';
 
 const FavouriteCharactersScreen = () => {
   return (
@@ -8,14 +8,5 @@ const FavouriteCharactersScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  headerContainer: {
-    justifyContent: 'space-between',
-    alignContent: 'center',
-    alignItems: 'center',
-    height: 300,
-  },
-});
 
 export default FavouriteCharactersScreen;
